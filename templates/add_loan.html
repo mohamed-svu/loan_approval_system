@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center my-4">نموذج طلب قرض جديد</h2>
+
+    {% if show_result %}
+    <div class="alert alert-{{ 'success' if prediction == 'مقبول' else 'danger' }} text-center">
+        <h4>نتيجة الطلب:</h4>
+        <p class="h2">{{ prediction }}</p>
+    </div>
+    {% endif %}
+
+    <form method="POST" class="needs-validation" novalidate>
+        <div class="row">
+            <!-- العمود الأول -->
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="gender" class="form-label">الجنس</label>
+                    <select class="form-select" id="gender" name="gender" required>
+                        <option value="" selected disabled>اختر الجنس...</option>
+                        <option value="Male">ذكر</option>
+                        <option value="Female">أنثى</option>
+                    </select>
+                    <div class="invalid-feedback">يجب اختيار الجنس</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="married" class="form-label">الحالة الاجتماعية</label>
+                    <select class="form-select" id="married" name="married" required>
+                        <option value="" selected disabled>اختر الحالة...</option>
+                        <option value="Yes">متزوج</option>
+                        <option value="No">أعزب</option>
+                    </select>
+                    <div class="invalid-feedback">يجب اختيار الحالة الاجتماعية</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="dependents" class="form-label">عدد المعالين</label>
+                    <select class="form-select" id="dependents" name="dependents" required>
+                        <option value="" selected disabled>اختر عدد المعالين...</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3+">3 أو أكثر</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="education" class="form-label">المستوى التعليمي</label>
+                    <select class="form-select" id="education" name="education" required>
+                        <option value="" selected disabled>اختر المستوى التعليمي...</option>
+                        <option value="Graduate">جامعي</option>
+                        <option value="Not Graduate">غير جامعي</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- العمود الثاني -->
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="self_employed" class="form-label">العمل الحر</label>
+                    <select class="form-select" id="self_employed" name="self_employed" required>
+                        <option value="" selected disabled>اختر حالة العمل...</option>
+                        <option value="Yes">نعم</option>
+                        <option value="No">لا</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="applicant_income" class="form-label">الدخل الشهري (بالليرة السورية)</label>
+                    <input type="number" class="form-control" id="applicant_income" name="applicant_income" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="coapplicant_income" class="form-label">دخل الشريك (بالليرة السورية)</label>
+                    <input type="number" class="form-control" id="coapplicant_income" name="coapplicant_income" value="0">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="loan_amount" class="form-label">مبلغ القرض المطلوب</label>
+                    <input type="number" class="form-control" id="loan_amount" name="loan_amount" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- الصف الثاني -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label for="loan_term" class="form-label">مدة القرض (شهر)</label>
+                    <input type="number" class="form-control" id="loan_term" name="loan_term" value="360" required>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label for="credit_history" class="form-label">السجل الائتماني</label>
+                    <select class="form-select" id="credit_history" name="credit_history" required>
+                        <option value="" selected disabled>اختر السجل الائتماني...</option>
+                        <option value="1">جيد</option>
+                        <option value="0">سيء</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label for="property_area" class="form-label">منطقة العقار</label>
+                    <select class="form-select" id="property_area" name="property_area" required>
+                        <option value="" selected disabled>اختر المنطقة...</option>
+                        <option value="Urban">العاصمة</option>
+                        <option value="Semiurban">مركز محافظة</option>
+                        <option value="Rural">ريفية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">تقديم الطلب</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary btn-lg mx-2">العودة للرئيسية</a>
+        </div>
+    </form>
+</div>
+
+<script>
+// JavaScript لتفعيل التحقق من النموذج
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
+
+<style>
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.invalid-feedback {
+    color: #dc3545;
+}
+.was-validated .form-control:invalid,
+.was-validated .form-select:invalid {
+    border-color: #dc3545;
+}
+</style>
+{% endblock %}

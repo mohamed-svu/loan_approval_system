@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container metrics-container">
+    <h2 class="text-center my-4">مقاييس أداء النموذج</h2>
+    
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>الدقة (Accuracy)</h3>
+            <div class="metric-value">{{ accuracy }}%</div>
+            <p>نسبة التصنيفات الصحيحة من بين جميع التصنيفات</p>
+        </div>
+        
+        <div class="metric-card">
+            <h3>الدقة التصنيفية (Precision)</h3>
+            <div class="metric-value">{{ precision }}%</div>
+            <p>نسبة التنبؤات الإيجابية الصحيحة</p>
+        </div>
+        
+        <div class="metric-card">
+            <h3>الاستدعاء (Recall)</h3>
+            <div class="metric-value">{{ recall }}%</div>
+            <p>نسبة الحالات الإيجابية التي تم التعرف عليها</p>
+        </div>
+        
+        <div class="metric-card">
+            <h3>درجة F1</h3>
+            <div class="metric-value">{{ f1 }}%</div>
+            <p>متوسط توافقي بين الدقة والاستدعاء</p>
+        </div>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">العودة للرئيسية</a>
+    </div>
+</div>
+
+<style>
+.metrics-container {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.metric-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 15px 0;
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}نظام الموافقة على القروض{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>نظام الموافقة على القروض البنكية</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">الصفحة الرئيسية</a></li>
+            <li><a href="{{ url_for('add_loan') }}">إضافة طلب قرض</a></li>
+            <li><a href="{{ url_for('analysis') }}">تحليل البيانات</a></li>
+            <li><a href="{{ url_for('show_metrics') }}">مقاييس النموذج</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 نظام الموافقة على القروض - مشروع تعلم الآلة<br>
+        mohammed_307693</p>
+    </footer>
+</body>
+</html>

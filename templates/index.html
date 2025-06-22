@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h2>مرحبًا بك في نظام الموافقة على القروض</h2>
+    <p>هذا النظام يستخدم تقنيات تعلم الآلة للتنبؤ بموافقة البنك على طلبات القروض.</p>
+    
+    <div class="features">
+        <div class="feature">
+            <h3>إضافة طلب جديد</h3>
+            <p>أدخل بيانات طلب القرض للحصول على تنبؤ فوري.</p>
+            <a href="{{ url_for('add_loan') }}" class="btn">إضافة طلب</a>
+        </div>
+        
+        <div class="feature">
+            <h3>تحليل البيانات</h3>
+            <p>استكشف تحليلات البيانات لطلبات القروض السابقة.</p>
+            <a href="{{ url_for('analysis') }}" class="btn">عرض التحليلات</a>
+        </div>
+        
+        <div class="feature">
+            <h3>أداء النموذج</h3>
+            <p>اطلع على مقاييس أداء النموذج مثل الدقة والاستدعاء.</p>
+            <a href="{{ url_for('show_metrics') }}" class="btn">عرض المقاييس</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
